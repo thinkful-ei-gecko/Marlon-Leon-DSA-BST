@@ -147,5 +147,29 @@ function findHeight(t, h = 0) {
   }
   return h;
 }
-console.log(findHeight(main()));
+// console.log(findHeight(main()));
 
+//Question 6 
+
+let firstNode = new BST(this.key= 1, this.value= null, this.parent= null);
+let secondNode = new BST(this.key=3, this.value= null, this.parent=null);
+let thirdNode = new BST(this.key=2, this.value= null, this.parent= null);
+firstNode.left = secondNode;
+firstNode.right = thirdNode;
+
+function isItABST(t) {
+  if (!t) {
+    return true;
+  }
+  if (t.left && t.left.key > t.key || t.right && t.right.key < t.key) {
+    return false;
+  }
+  let checkLeft = isItABST(t.left);
+  let checkRight = isItABST(t.right);
+  if (!checkLeft || !checkRight) {
+    return false;
+  }
+  return true;
+}
+console.log(isItABST(firstNode));
+// console.log(firstNode);

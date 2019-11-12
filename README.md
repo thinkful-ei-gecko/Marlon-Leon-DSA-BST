@@ -1,0 +1,1 @@
+This repository is the binary search trees module done as a pair assignment by Marlon and Leon from the Data Structures and Algorithms portion of the Engineering Immersion Thinkful curriculum.

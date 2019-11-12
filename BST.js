@@ -117,8 +117,6 @@ function main() {
   firstBST.insert(6);
   firstBST.insert(9);
  
- 
-
   return firstBST;
 }
 
@@ -171,5 +169,53 @@ function isItABST(t) {
   }
   return true;
 }
-console.log(isItABST(firstNode));
+
+// console.log(isItABST(firstNode));
 // console.log(firstNode);
+
+//first find the largest value of the tree
+//2nd largest value
+//if left go to the farthest value in the tree
+//if !left go up one node
+//
+//3rd largest value 
+//if left go to the farthest value in the tree
+//if !left go up one node
+
+function findGreatestNode(t) {
+  let curr = t;
+  while(curr.right != null){
+    curr = curr.right;
+  }
+
+  return curr;
+}
+
+function thirdLargestNode(t) {
+  let maxNode = findGreatestNode(t);
+  let secondNode;
+  let thirdNode;
+
+  if(maxNode.parent.left){
+    secondNode = findGreatestNode(maxNode.parent.left);
+  } 
+  else{
+    secondNode = maxNode.parent;
+  }
+
+  if(secondNode.left && secondNode.right){
+    thirdNode = findGreatestNode(secondNode.left);
+  }
+  else if(secondNode.left){
+    thirdNode = secondNode.parent;
+  }
+  else {
+    thirdNode = secondNode.parent;
+  }
+  
+  return thirdNode;
+  
+}
+
+console.log(thirdLargestNode(main()));
+//

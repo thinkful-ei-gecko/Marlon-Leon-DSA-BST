@@ -196,25 +196,23 @@ function thirdLargestNode(t) {
   let secondNode;
   let thirdNode;
 
-  if(maxNode.parent.left){
+  //find secondNode
+  if(maxNode.left){
     secondNode = findGreatestNode(maxNode.parent.left);
   } 
   else{
     secondNode = maxNode.parent;
   }
 
-  if(secondNode.left && secondNode.right){
+  //find thirdNode
+  if(secondNode.left){
     thirdNode = findGreatestNode(secondNode.left);
-  }
-  else if(secondNode.left){
-    thirdNode = secondNode.parent;
   }
   else {
     thirdNode = secondNode.parent;
   }
-  
-  return thirdNode;
-  
+
+  return thirdNode.key;
 }
 
 console.log(thirdLargestNode(main()));

@@ -31,13 +31,24 @@ class BST {
       }
     }
   }
-  _replaceWith() {
+  _replaceWith(node) {
+    if (this.parent) {
+      if (this == this.parent.left) {
+        this.parent.left = node;
+      }
+      else if (this == this.parent.right) {
+        this.parent.right = node;
+      }
 
+      if (node) {
+        node.parent = this.parent;
+      }
+    }
   }
 
   _findMin() {
     if(this.left != null){
-      this.left._findMin;
+      this.left._findMin();
     }
     else {
       return this;
@@ -45,24 +56,22 @@ class BST {
   }
 
   remove(key) {
-    if (key === this.key){
+    if (key == this.key){
       if(this.left == null && this.right == null) {
-        if(this.key < this.parent) {
-          this.parent.left = null;
-        } 
-        else if(this.key > this.parent) {
-          this.parent.right = null;
-        } 
+        this._replaceWith(null);
       }
       else if(this.right != null && this.left != null) {
-        //
+        let sucessor = this.right._findMin();
+        this.key = sucessor.key;
+        this.value = sucessor.value;
+        this.remove(sucessor);
       }
       else if(this.left != null){
-        //
+        this._replaceWith(this.left);
       }
 
       else if(this.right != null){
-        //
+        this._replaceWith(this.right);
       }
     }
     else if (key < this.key){
@@ -75,15 +84,14 @@ class BST {
         this.right.remove(key);
       }
     }
-    throw new Error('Key does not exist');
-   
-    //_replaceWith
-    //_findMin
+    else {
+      throw new Error('Key does not exist');
+    }
   }
 
   find(key) {
     if (key === this.key) {
-      return this;
+      return this.value;
     }
     else if (key < this.key) {
       this.left.find(key);
@@ -91,6 +99,27 @@ class BST {
     else if (key > this.key) {
       this.right.find(key);
     }
-    throw new Error('Key does not exist');
+    else {
+      throw new Error('Key does not exist');
+    }
   }
 }
+
+function main() {
+  let firstBST = new BST;
+
+  firstBST.insert(5);
+  firstBST.insert(3);
+  firstBST.insert(7);
+  firstBST.insert(2);
+  firstBST.insert(4);
+  firstBST.insert(1);
+  firstBST.insert(6);
+  firstBST.insert(9);
+ 
+ 
+
+  return firstBST;
+}
+
+console.log(main());

@@ -124,8 +124,12 @@ function main() {
 
 // console.log(main());
 
-//Question 5
+//Question 4
+//O(n)
 
+
+//Question 5
+//O(n)
 function findHeight(t, h = 0) {
   if (!t) {
     return h;

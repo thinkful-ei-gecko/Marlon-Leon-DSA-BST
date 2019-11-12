@@ -192,28 +192,18 @@ function findGreatestNode(t) {
 }
 
 function thirdLargestNode(t) {
-  let maxNode = findGreatestNode(t);
-  let secondNode;
-  let thirdNode;
+  let currNode = findGreatestNode(t);
 
-  //find secondNode
-  if(maxNode.left){
-    secondNode = findGreatestNode(maxNode.parent.left);
-  } 
-  else{
-    secondNode = maxNode.parent;
+  for(let i = 0; i < 2; i++){
+    if(currNode.left){
+      currNode = findGreatestNode(currNode.left);
+    } 
+    else{
+      currNode = currNode.parent;
+    }
   }
 
-  //find thirdNode
-  if(secondNode.left){
-    thirdNode = findGreatestNode(secondNode.left);
-  }
-  else {
-    thirdNode = secondNode.parent;
-  }
-
-  return thirdNode.key;
+  return currNode.key;
 }
 
 console.log(thirdLargestNode(main()));
-//

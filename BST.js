@@ -122,4 +122,26 @@ function main() {
   return firstBST;
 }
 
-console.log(main());
+// console.log(main());
+
+//Question 5
+
+function findHeight(t, h = 0) {
+  if (!t) {
+    return h;
+  }
+  h++;
+  let leftResult;
+  let rightResult;
+  leftResult = findHeight(t.left, h);
+  rightResult = findHeight(t.right, h);
+  if (leftResult > rightResult) {
+    h = leftResult;
+  }
+  else if (rightResult > leftResult) {
+    h = rightResult;
+  }
+  return h;
+}
+console.log(findHeight(main()));
+

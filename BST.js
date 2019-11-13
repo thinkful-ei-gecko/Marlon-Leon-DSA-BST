@@ -182,28 +182,81 @@ function isItABST(t) {
 //if left go to the farthest value in the tree
 //if !left go up one node
 
-function findGreatestNode(t) {
-  let curr = t;
-  while(curr.right != null){
-    curr = curr.right;
-  }
+// function findGreatestNode(t) {
+//   let curr = t;
+//   while(curr.right != null){
+//     curr = curr.right;
+//   }
 
-  return curr;
+//   return curr;
+// }
+
+// function thirdLargestNode(t) {
+//   let currNode = findGreatestNode(t);
+
+//   for(let i = 0; i < 2; i++){
+//     if(currNode.left){
+//       currNode = findGreatestNode(currNode.left);
+//     } 
+//     else{
+//       currNode = currNode.parent;
+//     }
+//   }
+
+//   return currNode.key;
+// }
+
+// console.log(thirdLargestNode(main()));
+
+
+
+function thirdGreatestNode(t, count=0) {
+  //find greatest on right til null
+  let currNode = t;
+  while (currNode != null) {
+    currNode = currNode.next;
+  }
+  count++;
+
+  if (count === 3) {
+    return t;
+  }
+  
+  if (currNode.left) {
+    thirdGreatestNode(currNode.left, count);
+  }
+  else {
+    return upPhase(currNode, count+1);
+  }
 }
 
-function thirdLargestNode(t) {
-  let currNode = findGreatestNode(t);
-
-  for(let i = 0; i < 2; i++){
-    if(currNode.left){
-      currNode = findGreatestNode(currNode.left);
-    } 
-    else{
-      currNode = currNode.parent;
-    }
+function upPhase(t, count) {
+  let currNode = t.parent;
+  if (count === 3) {
+    return t;
+  }
+  if (currNode.left) {
+    thirdGreatestNode(currNode.left, count);
+  }
+  else {
+    upPhase(t, count+1);
   }
 
-  return currNode.key;
 }
 
-console.log(thirdLargestNode(main()));
+// console.log(thirdGreatestNode(main()));
+
+function tree(t, count=0){
+  if(!t){
+    count++;
+    return;
+  }
+  tree(t.right, count);
+  if (count ===3) {
+    return t.key;
+  }
+  tree(t.left, count);
+}
+
+// console.log(main());
+console.log(tree(main()));
